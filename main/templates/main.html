@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+  <link rel="icon" type="image/png" size="16" href="./asset/favicon.ico" />
+  <title>Test</title>
+  <script src="https://kit.fontawesome.com/6c2b708adc.js" crossorigin="anonymous"></script>
+  <style type="text/css">
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      font-size: 12px;
+      color: #28282f;
+      margin: 0em;
+    }
+
+    body {
+      margin: 0em;
+      padding: 0em;
+      overflow: hidden;
+      font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial,
+        "Lucida Grande", sans-serif;
+    }
+
+    p,
+    img,
+    div,
+    canvas {
+      vertical-align: top;
+    }
+
+    ::-moz-selection {
+      background: #34495e;
+      background-color: #34495e;
+      color: #fff;
+    }
+
+    ::selection {
+      background: #34495e;
+      background-color: #34495e;
+      color: #fff;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    #menu {
+      width: 28em;
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      border-radius: 0.9em;
+
+      text-align: center;
+      font-size: 1.2em;
+
+      background-color: #fff;
+      opacity: 1;
+
+      background: #ffffff;
+
+      -webkit-box-shadow: 0em 0.25em 0.75em rgba(124, 124, 124, 0.5);
+      -moz-box-shadow: 0em 0.25em 0.75em rgba(124, 124, 124, 0.5);
+      box-shadow: 0em 0.25em 0.75em rgba(124, 124, 124, 0.5);
+    }
+
+    #menu #img_container {
+      height: 14.5em;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+
+      border-top-left-radius: 0.9em;
+      border-top-right-radius: 0.9em;
+    }
+
+    #menu #img_container img {
+      flex-shrink: 0;
+      width: 105%;
+    }
+
+    #menu #content {
+      padding: 0.5em;
+    }
+
+    #menu #content div {
+      margin-bottom: 1em;
+    }
+
+    #menu h1 {
+      font-family: "Oswald";
+      letter-spacing: 0.25em;
+    }
+
+    #menu p {
+      font-family: "Lato";
+      margin: 0em;
+    }
+
+    .enableEthereumButton {
+      display: inline-block;
+      border-radius: 0.9em;
+      border: solid #48484f 0.1em;
+      padding-left: 1.5em;
+      padding-right: 1.5em;
+      padding-top: 0.12em;
+      padding-bottom: 0.12em;
+      font-family: "Lato";
+      margin-bottom: 1.5em;
+      transition: all 0.4s;
+    }
+
+    .enableEthereumButton:hover {
+      border: solid #a8a8af 0.1em;
+      color: #a8a8af;
+      cursor: pointer;
+      transition: all 0.4s;
+    }
+
+    #menu #play_button {
+      display: inline-block;
+      border-radius: 0.9em;
+      border: solid #48484f 0.1em;
+      padding-left: 1.5em;
+      padding-right: 1.5em;
+      padding-top: 0.12em;
+      padding-bottom: 0.12em;
+
+      margin-bottom: 1.5em;
+      transition: all 0.4s;
+    }
+
+    #menu #play_button:hover {
+      border: solid #a8a8af 0.1em;
+      color: #a8a8af;
+      cursor: pointer;
+      transition: all 0.4s;
+    }
+
+    #menu #play_button p {
+      font-family: "Oswald";
+      letter-spacing: 0.125em;
+      color: #48484f;
+      font-size: 1.3em;
+      transition: all 0.4s;
+    }
+
+    #menu #play_button:hover p {
+      color: #a8a8af;
+      transition: all 0.4s;
+    }
+
+    #background_menu {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+
+      background-color: #111;
+      opacity: 0.125;
+    }
+
+    #controller-forward {
+      position: fixed;
+      bottom: 80px;
+      right: 60px;
+      font-size: 40px;
+      color: red;
+    }
+
+    #controller-right {
+      position: fixed;
+      bottom: 42px;
+      right: 20px;
+      font-size: 40px;
+      color: red;
+    }
+
+    #controller-back {
+      position: fixed;
+      right: 60px;
+      bottom: 2px;
+      font-size: 40px;
+      color: red;
+    }
+
+    #controller-left {
+      position: fixed;
+      bottom: 42px;
+      right: 100px;
+      font-size: 40px;
+      color: red;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="background_menu"></div>
+
+  <div id="menu">
+    <div id="content">
+      <h1>Mi Galeria Virtual</h1>
+      <div>
+        <p>Para comenzar inicia con MetaMask.</p>
+      </div>
+      <div>
+        <p>Controles:</p>
+        <p>W,A,S,D, Teclas de flechas = Moverse</p>
+        <p>Mouse = Mirar alrededor</p>
+      </div>
+      <div>
+        <button class="enableEthereumButton">Conectarse a ETH</button>
+      </div>
+      <div id="play_button">
+        <p>Iniciar</p>
+      </div>
+    </div>
+  </div>
+  <div id="mobile">
+    <p id="controller-forward"><i class="fal fa-arrow-circle-up"></i></p>
+    <p id="controller-right"><i class="fal fa-arrow-circle-right"></i></p>
+    <p id="controller-back"><i class="fal fa-arrow-circle-down"></i></p>
+    <p id="controller-left"><i class="fal fa-arrow-circle-left"></i></p>
+  </div>
+  <script>
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      document.getElementById("mobile").style.display = "block";
+    } else {
+      document.getElementById("mobile").style.display = "none";
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1-rc.0/web3.min.js"
+    integrity="sha512-+4Gl8sbHe5qD5EQiPtIva4be9TwUmmzgYJUdGbhsLYNegQw4Quda/4QdZpJzx8cHq2s1F4PoIpAnERQ0hHTcNQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+      if(typeof window.web3 !== "undefined" && typeof window.web3.currentProvider !== "undefined") {
+      var web3 = new Web3(window.web3.currentProvider);
+    } else {
+      var web3 = new Web3(new Web3.providers.HttpProvider('https://rpc.xdaichain.com/'));
+    }
+    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="{% static 'main/js/three/three.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'main/js/three/jsm/controls/PointerLockControls.js' %}" type="text/javascript"></script>
+  <script type="text/javascript" src="{% static 'main/js/main.js' %}"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+</body>
+
+</html>
